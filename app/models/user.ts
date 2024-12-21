@@ -6,6 +6,7 @@ import type { HasMany } from '@adonisjs/lucid/types/relations'
 import { DateTime } from 'luxon'
 import { UserRole } from '../enums/user_role.js'
 import Label from './label.js'
+import Task from './task.js'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -39,6 +40,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @hasMany(() => Label)
   declare labels: HasMany<typeof Label>
+
+  @hasMany(() => Task)
+  declare tasks: HasMany<typeof Task>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
