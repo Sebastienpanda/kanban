@@ -41,7 +41,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @hasMany(() => Label)
   declare labels: HasMany<typeof Label>
 
-  @hasMany(() => Task)
+  @hasMany(() => Task, {
+    foreignKey: 'createdById',
+  })
   declare tasks: HasMany<typeof Task>
 
   @column.dateTime({ autoCreate: true })
