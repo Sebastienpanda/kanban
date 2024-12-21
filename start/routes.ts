@@ -8,7 +8,15 @@
 */
 
 const TestsController = () => import('#controllers/tests_controller')
+const AuthController = () => import('#controllers/auth_controller')
 import router from '@adonisjs/core/services/router'
 router.on('/').renderInertia('home')
 
 router.post('/test', [TestsController, 'createTest'])
+
+router
+  .group(() => {
+    router.post('/register', [AuthController, 'register'])
+    router.post('/login', [AuthController, 'login'])
+  })
+  .prefix('/api')
