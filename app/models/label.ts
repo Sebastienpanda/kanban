@@ -14,12 +14,18 @@ export default class Label extends BaseModel {
   declare color: string
 
   @column()
-  declare userId: string
+  declare userId: string | null
+
+  @column({ columnName: 'created_by' })
+  declare createdById: string
 
   @belongsTo(() => User)
   declare user: BelongsTo<typeof User>
 
-  @belongsTo(() => User)
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+
+  @belongsTo(() => User, { foreignKey: 'created_by' })
   declare createdBy: BelongsTo<typeof User>
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })

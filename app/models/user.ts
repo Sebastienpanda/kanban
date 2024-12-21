@@ -1,8 +1,8 @@
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { compose } from '@adonisjs/core/helpers'
 import hash from '@adonisjs/core/services/hash'
-import { BaseModel, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
-import type { HasMany, HasOne } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
 import { DateTime } from 'luxon'
 import { UserRole } from '../enums/user_role.js'
 import Label from './label.js'
@@ -43,18 +43,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
-  @hasOne(() => User)
-  declare createdBy: HasOne<typeof User>
-
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 
-  @hasOne(() => User)
-  declare updatedBy: HasOne<typeof User>
-
   @column.dateTime()
   declare deletedAt: DateTime | null
-
-  @hasOne(() => User)
-  declare deletedBy: HasOne<typeof User>
 }
