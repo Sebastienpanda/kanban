@@ -17,26 +17,35 @@ export default class Label extends BaseModel {
   declare userId: string | null
 
   @column({ columnName: 'created_by' })
-  declare createdById: string
+  declare createdBy: string
 
-  @belongsTo(() => User)
-  declare user: BelongsTo<typeof User>
+  @belongsTo(() => User, {
+    foreignKey: 'created_by',
+  })
+  declare creator: BelongsTo<typeof User>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
 
-  @belongsTo(() => User, { foreignKey: 'created_by' })
-  declare createdBy: BelongsTo<typeof User>
+  @column({ columnName: 'updated_by' })
+  declare updatedBy: string
+
+  @belongsTo(() => User, {
+    foreignKey: 'updated_by',
+  })
+  declare updater: BelongsTo<typeof User>
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 
-  @belongsTo(() => User)
-  declare updatedBy: BelongsTo<typeof User>
+  @column({ columnName: 'deleted_by' })
+  declare deletedBy: string
+
+  @belongsTo(() => User, {
+    foreignKey: 'deleted_by',
+  })
+  declare deleter: BelongsTo<typeof User>
 
   @column.dateTime()
   declare deletedAt: DateTime | null
-
-  @belongsTo(() => User)
-  declare deletedBy: BelongsTo<typeof User>
 }

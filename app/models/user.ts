@@ -38,11 +38,13 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column()
   declare isActive: boolean
 
-  @hasMany(() => Label)
+  @hasMany(() => Label, {
+    foreignKey: 'createdBy',
+  })
   declare labels: HasMany<typeof Label>
 
   @hasMany(() => Task, {
-    foreignKey: 'createdById',
+    foreignKey: 'createdBy',
   })
   declare tasks: HasMany<typeof Task>
 
