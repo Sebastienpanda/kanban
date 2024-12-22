@@ -12,6 +12,7 @@ const AuthController = () => import('#controllers/auth_controller')
 const UsersController = () => import('#controllers/users_controller')
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+const TasksController = () => import('#controllers/tasks_controller')
 router.on('/').renderInertia('home')
 
 router.post('/test', [TestsController, 'createTest'])
@@ -20,6 +21,8 @@ router
   .group(() => {
     router.post('/register', [AuthController, 'register'])
     router.post('/login', [AuthController, 'login'])
+
+    router.post('/task', [TasksController, 'create'])
   })
   .prefix('/api')
 
