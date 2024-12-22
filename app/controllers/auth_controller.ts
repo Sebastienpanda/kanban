@@ -5,11 +5,7 @@ import { UserRepository } from '../repositories/user_repositorie.js'
 
 @inject()
 export default class AuthController {
-  private userRepository: UserRepository
-
-  constructor() {
-    this.userRepository = new UserRepository()
-  }
+  constructor(private userRepository: UserRepository) {}
 
   async register({ request, response }: HttpContext) {
     try {

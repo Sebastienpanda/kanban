@@ -4,11 +4,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 
 @inject()
 export default class UsersController {
-  private authService: AuthService
-
-  constructor() {
-    this.authService = new AuthService()
-  }
+  constructor(private authService: AuthService) {}
 
   async me({ response, auth }: HttpContext) {
     try {

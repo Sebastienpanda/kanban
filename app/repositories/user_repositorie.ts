@@ -7,11 +7,7 @@ import { UserSchema } from '../../types/user.js'
 
 @inject()
 export class UserRepository {
-  private authService: AuthService
-
-  constructor() {
-    this.authService = new AuthService()
-  }
+  constructor(private authService: AuthService) {}
   async createUser(data: UserSchema): Promise<User> {
     const user = await User.create({
       email: data.email,
